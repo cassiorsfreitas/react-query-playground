@@ -359,7 +359,8 @@ function BasicInvalidationExample() {
 }
 
 function AdvancedInvalidationExample() {
-  const [newTodoTitle, setNewTodoTitle] = useState("");
+  const [newTodoATitle, setNewTodoATitle] = useState("");
+  const [newTodoBTitle, setNewTodoBTitle] = useState("");
   const [newTodoPriority, setNewTodoPriority] = useState<
     "low" | "medium" | "high"
   >("medium");
@@ -385,7 +386,7 @@ function AdvancedInvalidationExample() {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos", "list-A"] });
-      setNewTodoTitle("");
+      setNewTodoATitle("");
       toast({
         title: "Todo added to List A",
         description: "Using direct invalidation",
@@ -424,7 +425,7 @@ function AdvancedInvalidationExample() {
         priority: newTodoPriority,
       }),
     onSuccess: () => {
-      setNewTodoTitle("");
+      setNewTodoBTitle("");
       toast({
         title: "Todo added to List B",
         description:
@@ -507,12 +508,11 @@ function AdvancedInvalidationExample() {
 
   const handleAddTodo = (e: React.FormEvent, list: "A" | "B") => {
     e.preventDefault();
-    if (newTodoTitle.trim()) {
-      if (list === "A") {
-        addTodoListA.mutate(newTodoTitle);
-      } else {
-        addTodoListB.mutate(newTodoTitle);
-      }
+    if (list === "A" && newTodoATitle.trim()) {
+      addTodoListA.mutate(newTodoATitle);
+    }
+    if (list === "B" && newTodoBTitle.trim()) {
+      addTodoListB.mutate(newTodoBTitle);
     }
   };
 
@@ -625,13 +625,13 @@ function AdvancedInvalidationExample() {
           >
             <Input
               placeholder="Add a new todo"
-              value={newTodoTitle}
-              onChange={(e) => setNewTodoTitle(e.target.value)}
+              value={newTodoATitle}
+              onChange={(e) => setNewTodoATitle(e.target.value)}
               disabled={addTodoListA.isPending}
             />
             <Button
               type="submit"
-              disabled={addTodoListA.isPending || !newTodoTitle.trim()}
+              disabled={addTodoListA.isPending || !newTodoATitle.trim()}
             >
               {addTodoListA.isPending ? (
                 "Adding..."
@@ -664,13 +664,13 @@ function AdvancedInvalidationExample() {
           >
             <Input
               placeholder="Add a new todo"
-              value={newTodoTitle}
-              onChange={(e) => setNewTodoTitle(e.target.value)}
+              value={newTodoBTitle}
+              onChange={(e) => setNewTodoBTitle(e.target.value)}
               disabled={addTodoListB.isPending}
             />
             <Button
               type="submit"
-              disabled={addTodoListB.isPending || !newTodoTitle.trim()}
+              disabled={addTodoListB.isPending || !newTodoBTitle.trim()}
             >
               {addTodoListB.isPending ? (
                 "Adding..."
