@@ -344,14 +344,28 @@ function BasicInvalidationExample() {
       <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm">
         <p className="font-medium mb-2">How invalidation works:</p>
         <ol className="list-decimal list-inside space-y-1">
-          <li>When you add or delete a todo, a mutation is triggered</li>
           <li>
-            After the mutation succeeds, we call{" "}
-            <code>invalidateQueries()</code>
+            <strong>Mutation triggered:</strong> When you add or delete a todo
           </li>
-          <li>This marks the [&quot;todos-list&quot;] query as stale</li>
-          <li>React Query automatically refetches stale queries</li>
-          <li>The UI updates with the fresh data</li>
+          <li>
+            <strong>Invalidation:</strong> After success, we call
+            <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
+              <code>{`queryClient.invalidateQueries({ queryKey: ["todos" })`}</code>
+            </div>
+          </li>
+          <li>
+            <strong>Stale marking:</strong> This marks the query as stale
+            <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
+              <code>{`["todos"]`}</code>
+            </div>
+          </li>
+          <li>
+            <strong>Auto-refetch:</strong> React Query automatically refetches
+            stale queries
+          </li>
+          <li>
+            <strong>UI update:</strong> The UI updates with the fresh data
+          </li>
         </ol>
       </div>
     </div>
@@ -804,7 +818,7 @@ predicate: (query) => {
       </div>
 
       <div className="mt-6 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm">
-        <p className="font-medium mb-2">How Predicate Invalidation Works:</p>
+        <p className="font-medium mb-2">How predicate invalidation works:</p>
         <ol className="list-decimal list-inside space-y-1">
           <li>
             <strong>Direct Invalidation:</strong> Automatically refetches after

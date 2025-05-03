@@ -208,23 +208,33 @@ export default function DependentQueriesExample() {
           </div>
         </div>
 
-        <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm">
+        <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm text-left">
           <p className="font-medium mb-2">How dependent queries work:</p>
           <ol className="list-decimal list-inside space-y-1">
-            <li>First query fetches the list of users</li>
-            <li>When a user is selected, their ID is stored in state</li>
             <li>
-              The posts query includes the user ID in its query key:{" "}
-              {`["posts",
-              userId]`}
+              <strong>Initial Query:</strong> Fetches the list of users
             </li>
             <li>
-              The <code>enabled</code> option prevents the query from running
-              until a user is selected
+              <strong>User Selection:</strong> When a user is selected, their ID
+              is stored in state
             </li>
             <li>
-              When the user selection changes, React Query automatically
-              refetches the dependent query
+              <strong>Dependent Query:</strong> Posts query includes the user ID
+              in its query key
+              <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
+                <code>{`queryKey: ["posts", userId]`}</code>
+              </div>
+            </li>
+            <li>
+              <strong>Query Control:</strong> The <code>enabled</code> option
+              prevents the query from running until a user is selected
+              <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
+                <code>{`enabled: !!userId`}</code>
+              </div>
+            </li>
+            <li>
+              <strong>Automatic Refetch:</strong> When the user selection
+              changes, React Query automatically refetches the dependent query
             </li>
           </ol>
         </div>

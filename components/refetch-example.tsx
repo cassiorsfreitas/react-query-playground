@@ -14,6 +14,7 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const fetchRandomNumber = async () => {
   await new Promise((resolve) => setTimeout(resolve, 800));
@@ -80,22 +81,54 @@ export default function RefetchExample() {
             </div>
             <div className="flex flex-col sm:flex-row gap-2 justify-center">
               <Button onClick={() => refetch()}>Manual Refetch</Button>
-              <Button
-                variant={refetchInterval ? "destructive" : "outline"}
-                onClick={toggleAutoRefetch}
-              >
-                {refetchInterval
-                  ? "Stop Auto Refetch (2s)"
-                  : "Start Auto Refetch (2s)"}
-              </Button>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant={refetchInterval ? "destructive" : "outline"}
+                    onClick={toggleAutoRefetch}
+                  >
+                    {refetchInterval
+                      ? "Stop Auto Refetch (2s)"
+                      : "Start Auto Refetch (2s)"}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <pre className="text-xs">
+                    <code>
+                      {`useQuery({
+  queryKey: ["randomNumber"],
+  queryFn: fetchRandomNumber,
+  refetchInterval,
+})`}
+                    </code>
+                  </pre>
+                </TooltipContent>
+              </Tooltip>
             </div>
-            <div className="mt-4 text-sm text-gray-500">
-              <p>Try these refetch triggers:</p>
-              <ul className="list-disc list-inside text-left mt-2">
-                <li>Click the Manual Refetch button</li>
-                <li>Enable Auto Refetch</li>
-                <li>Switch tabs and come back (refetchOnWindowFocus)</li>
-                <li>Wait for staleTime to pass (10 seconds)</li>
+            <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm text-left">
+              <p className="font-medium mb-2">Try these refetch triggers:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  <strong>Manual Refetch:</strong> Click the Manual Refetch
+                  button
+                </li>
+                <li>
+                  <strong>Auto Refetch:</strong> Enable background updates
+                </li>
+                <li>
+                  <strong>Window Focus:</strong> Switch tabs and come back
+                  <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
+                    <code>refetchOnWindowFocus: true</code>
+                  </div>
+                </li>
+                <li>
+                  <strong>Stale Timeout:</strong> Wait for{" "}
+                  <code>staleTime</code> to pass
+                  <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
+                    <code>staleTime: 10000</code> (10 seconds)
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
