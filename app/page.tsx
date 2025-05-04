@@ -8,7 +8,13 @@ import DependentQueriesExample from "@/components/dependent-queries-example";
 export default function Home() {
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">React Query Playground</h1>
+      <h1 className="text-3xl font-bold mb-6">
+        React Query{" "}
+        <span className="inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">
+          v5
+        </span>{" "}
+        Playground
+      </h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">
         A demonstration of React Query&apos;s key features, focusing on
         invalidation and refetching.

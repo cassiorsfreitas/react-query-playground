@@ -350,13 +350,13 @@ function BasicInvalidationExample() {
           <li>
             <strong>Invalidation:</strong> After success, we call
             <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
-              <code>{`queryClient.invalidateQueries({ queryKey: ["todos" })`}</code>
+              <code>{`queryClient.invalidateQueries({ queryKey: ["todos-list" })`}</code>
             </div>
           </li>
           <li>
             <strong>Stale marking:</strong> This marks the query as stale
             <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
-              <code>{`["todos"]`}</code>
+              <code>{`["todos-list"]`}</code>
             </div>
           </li>
           <li>
@@ -517,6 +517,14 @@ function AdvancedInvalidationExample() {
     toast({
       title: "Lists with recent todos invalidated",
       description: "Using timestamp-based predicate",
+    });
+  };
+
+  const invalidateBadly = () => {
+    queryClient.invalidateQueries({ queryKey: ["list-B"] });
+    toast({
+      title: "List B not invalidated",
+      description: `"list-B" is not the first item in the query key`,
     });
   };
 
@@ -812,6 +820,17 @@ predicate: (query) => {
 })`}
                 </code>
               </pre>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={invalidateBadly} variant="destructive" size="sm">
+                Invalidate List B badly
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{`invalidateQueries({ queryKey: ["list-B"] })`}</p>
             </TooltipContent>
           </Tooltip>
         </div>
