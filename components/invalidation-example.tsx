@@ -219,7 +219,7 @@ export default function InvalidationExample() {
         >
           <TabsList className="mb-4">
             <TabsTrigger value="basic">Basic Invalidation</TabsTrigger>
-            <TabsTrigger value="advanced">Advanced Predicates</TabsTrigger>
+            <TabsTrigger value="advanced">Predicates Invalidation</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic">

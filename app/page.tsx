@@ -1,52 +1,89 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import BasicQueryExample from "@/components/basic-query-example";
-import InvalidationExample from "@/components/invalidation-example";
-import RefetchExample from "@/components/refetch-example";
-import OptimisticUpdatesExample from "@/components/optimistic-updates-example";
-import DependentQueriesExample from "@/components/dependent-queries-example";
-
 export default function Home() {
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">
-        React Query{" "}
-        <span className="inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">
-          v5
-        </span>{" "}
-        Playground
-      </h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-8">
-        A demonstration of React Query&apos;s key features, focusing on
-        invalidation and refetching.
-      </p>
+    <div className="max-w-4xl mx-auto w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="border rounded-lg p-6 hover:border-primary/50 transition-colors">
+          <h2 className="text-xl font-semibold mb-2">Core Features</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Explore the fundamental capabilities of React Query
+          </p>
+          <ul className="space-y-2">
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Basic Queries</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Refetching Strategies</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Query Invalidation</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Dependent Queries</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Optimistic Updates</span>
+            </li>
+          </ul>
+        </div>
 
-      <Tabs defaultValue="basic" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="basic">Basic Query</TabsTrigger>
-          <TabsTrigger value="refetch">Refetch</TabsTrigger>
-          <TabsTrigger value="invalidation">Invalidation</TabsTrigger>
-          <TabsTrigger value="dependent">Dependent Queries</TabsTrigger>
-          <TabsTrigger value="optimistic">Optimistic Updates</TabsTrigger>
-        </TabsList>
-        <TabsContent value="basic" className="p-4 border rounded-md mt-2">
-          <BasicQueryExample />
-        </TabsContent>
-        <TabsContent value="refetch" className="p-4 border rounded-md mt-2">
-          <RefetchExample />
-        </TabsContent>
-        <TabsContent
-          value="invalidation"
-          className="p-4 border rounded-md mt-2"
-        >
-          <InvalidationExample />
-        </TabsContent>
-        <TabsContent value="dependent" className="p-4 border rounded-md mt-2">
-          <DependentQueriesExample />
-        </TabsContent>
-        <TabsContent value="optimistic" className="p-4 border rounded-md mt-2">
-          <OptimisticUpdatesExample />
-        </TabsContent>
-      </Tabs>
+        <div className="border rounded-lg p-6 hover:border-primary/50 transition-colors">
+          <h2 className="text-xl font-semibold mb-2">Advanced Features</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Dive deeper into React Query&apos;s advanced capabilities
+          </p>
+          <ul className="space-y-2">
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Pagination</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Infinite Queries</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Prefetching</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Query Cancellation</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Suspense Mode</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>WebSocket/Realtime Updates</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              <span>Testing</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="mt-12 p-6 border rounded-lg bg-muted/30">
+        <h2 className="text-xl font-semibold mb-4">Getting Started</h2>
+        <p className="mb-4">
+          Navigate through the examples using the sidebar. Each example
+          demonstrates a specific feature of React Query with practical use
+          cases.
+        </p>
+        <p>
+          It is highly recommended to explore the examples with the{" "}
+          <strong>TanStack DevTools</strong> enabled. This will give you deeper
+          insights into what&apos;s happening under the hood, such as query
+          states, cache updates, and background refetching, making it easier to
+          understand how React Query works in practice.
+        </p>
+      </div>
     </div>
   );
 }
