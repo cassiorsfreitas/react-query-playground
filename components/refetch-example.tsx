@@ -15,6 +15,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { CodeBlock } from "./code-block";
 
 const fetchRandomNumber = async () => {
   await new Promise((resolve) => setTimeout(resolve, 800));
@@ -94,19 +95,17 @@ export default function RefetchExample() {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <pre className="text-xs">
-                    <code>
-                      {`useQuery({
+                  <CodeBlock
+                    code={`useQuery({
   queryKey: ["randomNumber"],
   queryFn: fetchRandomNumber,
   refetchInterval,
 })`}
-                    </code>
-                  </pre>
+                  />
                 </TooltipContent>
               </Tooltip>
             </div>
-            <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm text-left">
+            <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
               <p className="font-medium mb-2">Try these refetch triggers:</p>
               <ul className="list-disc list-inside space-y-1">
                 <li>
@@ -123,10 +122,9 @@ export default function RefetchExample() {
                   </div>
                 </li>
                 <li>
-                  <strong>Stale Timeout:</strong> Wait for{" "}
-                  <code>staleTime</code> to pass
+                  <strong>Stale Timeout:</strong> Wait for staleTime to pass
                   <div className="ml-6 text-xs text-gray-600 dark:text-gray-400">
-                    <code>staleTime: 10000</code> (10 seconds)
+                    staleTime: 10000 (10 seconds)
                   </div>
                 </li>
               </ul>

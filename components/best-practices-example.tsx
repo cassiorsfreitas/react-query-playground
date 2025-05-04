@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "./code-block";
 import { AlertCircle, CheckCircle, Code, Lightbulb } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useCodeTheme } from "./theme-code-provider";
 
 const QUERY_KEYS_FACTORY = `export const queryKeys = {
   todos: ["todos"] as const,
@@ -20,7 +21,7 @@ const QUERY_KEYS_FACTORY = `export const queryKeys = {
   todoItem: (id: number) => [...queryKeys.todos, id] as const,
   todoSearch: (filters: { status?: string; query?: string }) => 
     [...queryKeys.todos, "search", filters] as const,
-  todoStats: () => [...queryKeys.todos, "stats"] as const,
+  todoStats: () => [...queryKeys.todos, "stats"] as const
 };
 
 // Usage examples:
@@ -290,6 +291,7 @@ function TodoPagination({ currentPage, totalPages }) {
 
 export default function BestPracticesExample() {
   const [activeTab, setActiveTab] = useState("query-keys");
+  const { codeTheme } = useCodeTheme();
 
   return (
     <div className="space-y-6">
@@ -345,7 +347,7 @@ export default function BestPracticesExample() {
                   Create a dedicated file for query keys that exports a factory
                   object with methods for generating keys.
                 </p>
-                <CodeBlock code={QUERY_KEYS_FACTORY} />
+                <CodeBlock code={QUERY_KEYS_FACTORY} theme={codeTheme} />
               </div>
 
               <div className="space-y-2">
@@ -422,7 +424,10 @@ export default function BestPracticesExample() {
                   Create a dedicated API module that handles all data fetching
                   logic, then use it in your query functions.
                 </p>
-                <CodeBlock code={QUERY_FUNCTION_ABSTRACTION} />
+                <CodeBlock
+                  code={QUERY_FUNCTION_ABSTRACTION}
+                  theme={codeTheme}
+                />
               </div>
 
               <div className="space-y-2">
@@ -474,7 +479,7 @@ export default function BestPracticesExample() {
                   Create custom hooks for each entity or feature in your
                   application, combining queries and mutations.
                 </p>
-                <CodeBlock code={CUSTOM_HOOKS} />
+                <CodeBlock code={CUSTOM_HOOKS} theme={codeTheme} />
               </div>
 
               <div className="space-y-2">
@@ -526,7 +531,7 @@ export default function BestPracticesExample() {
                   Combine global error handling with component-specific error UI
                   when needed.
                 </p>
-                <CodeBlock code={ERROR_HANDLING} />
+                <CodeBlock code={ERROR_HANDLING} theme={codeTheme} />
               </div>
 
               <div className="space-y-2">
@@ -578,7 +583,7 @@ export default function BestPracticesExample() {
                   Use the mutation lifecycle hooks to update the cache
                   optimistically and roll back on errors.
                 </p>
-                <CodeBlock code={OPTIMISTIC_UPDATES} />
+                <CodeBlock code={OPTIMISTIC_UPDATES} theme={codeTheme} />
               </div>
 
               <div className="space-y-2">
@@ -636,7 +641,7 @@ export default function BestPracticesExample() {
                   Implement different prefetching strategies based on user
                   behavior and application needs.
                 </p>
-                <CodeBlock code={PREFETCHING_STRATEGIES} />
+                <CodeBlock code={PREFETCHING_STRATEGIES} theme={codeTheme} />
               </div>
 
               <div className="space-y-2">

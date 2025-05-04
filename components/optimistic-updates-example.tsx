@@ -244,7 +244,7 @@ export default function OptimisticUpdatesExample() {
           </div>
         )}
 
-        <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm">
+        <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm">
           <p className="font-medium mb-2">How optimistic updates work:</p>
           <ol className="list-decimal list-inside space-y-1">
             <li>

@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Toaster } from "@/components/ui/toaster";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import { CodeThemeProvider } from "@/components/theme-code-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,35 +28,37 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="dark">
-          <QueryProviders>
-            <SidebarProvider>
-              <div className="flex min-h-screen w-full">
-                <AppSidebar />
-                <SidebarInset>
-                  <header className="flex h-16 items-center justify-between border-b px-6">
-                    <h1 className="text-xl font-bold">
-                      React Query{" "}
-                      <span className="inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">
-                        v5
-                      </span>{" "}
-                      Playground
-                    </h1>
-                    <div className="flex items-center gap-3">
-                      <ThemeToggle />
-                      <Link
-                        className="text-sm flex items-center gap-2"
-                        href="/"
-                      >
-                        <ExternalLink size={14} /> Docs
-                      </Link>
-                    </div>
-                  </header>
-                  <main className="p-6">{children}</main>
-                </SidebarInset>
-              </div>
-            </SidebarProvider>
-            <Toaster />
-          </QueryProviders>
+          <CodeThemeProvider>
+            <QueryProviders>
+              <SidebarProvider>
+                <div className="flex min-h-screen w-full">
+                  <AppSidebar />
+                  <SidebarInset>
+                    <header className="flex h-16 items-center justify-between border-b px-6">
+                      <h1 className="text-xl font-bold">
+                        React Query{" "}
+                        <span className="inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">
+                          v5
+                        </span>{" "}
+                        Playground
+                      </h1>
+                      <div className="flex items-center gap-3">
+                        <ThemeToggle />
+                        <Link
+                          className="text-sm flex items-center gap-2"
+                          href="/"
+                        >
+                          <ExternalLink size={14} /> Docs
+                        </Link>
+                      </div>
+                    </header>
+                    <main className="p-6">{children}</main>
+                  </SidebarInset>
+                </div>
+              </SidebarProvider>
+              <Toaster />
+            </QueryProviders>
+          </CodeThemeProvider>
         </ThemeProvider>
       </body>
     </html>

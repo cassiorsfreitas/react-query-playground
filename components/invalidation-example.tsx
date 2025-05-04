@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { CodeBlock } from "./code-block";
 
 interface BasicTodo {
   id: number;
@@ -341,7 +342,7 @@ function BasicInvalidationExample() {
         </div>
       )}
 
-      <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm">
+      <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm">
         <p className="font-medium mb-2">How invalidation works:</p>
         <ol className="list-decimal list-inside space-y-1">
           <li>
@@ -716,7 +717,7 @@ function AdvancedInvalidationExample() {
         </div>
       </div>
 
-      <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-md">
+      <div className="mt-6 p-4 bg-gray-50 dark:bg-muted rounded-md">
         <h3 className="font-medium mb-3">Invalidation Controls</h3>
         <div className="flex flex-wrap gap-2">
           <Tooltip>
@@ -732,14 +733,12 @@ function AdvancedInvalidationExample() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <pre className="text-xs">
-                <code>
-                  {`useQuery({
+              <CodeBlock
+                code={`useQuery({
   queryKey: ["todos", "list-B"],
   queryFn: () => fetchAdvancedTodos("B")
 })`}
-                </code>
-              </pre>
+              />
             </TooltipContent>
           </Tooltip>
 
@@ -754,7 +753,9 @@ function AdvancedInvalidationExample() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{`invalidateQueries({ queryKey: ["todos", "list-B"] })`}</p>
+              <CodeBlock
+                code={`invalidateQueries({ queryKey: ["todos", "list-B"] })`}
+              />
             </TooltipContent>
           </Tooltip>
 
@@ -765,7 +766,7 @@ function AdvancedInvalidationExample() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{`invalidateQueries({ queryKey: ["todos"] })`}</p>
+              <CodeBlock code={`invalidateQueries({ queryKey: ["todos"] })`} />
             </TooltipContent>
           </Tooltip>
 
@@ -780,9 +781,8 @@ function AdvancedInvalidationExample() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <pre className="text-xs">
-                <code>
-                  {`invalidateQueries({
+              <CodeBlock
+                code={`invalidateQueries({
   predicate: (query) => {
     const queryKey = query.queryKey as string[];
     if (queryKey[0] !== "todos") return false;
@@ -791,8 +791,7 @@ function AdvancedInvalidationExample() {
     return data?.some((todo) => todo.priority === "high") ?? false;
   }
 })`}
-                </code>
-              </pre>
+              />
             </TooltipContent>
           </Tooltip>
 
@@ -807,9 +806,8 @@ function AdvancedInvalidationExample() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <pre className="text-xs">
-                <code>
-                  {`invalidateQueries({
+              <CodeBlock
+                code={`invalidateQueries({
 predicate: (query) => {
     const queryKey = query.queryKey as string[];
     if (queryKey[0] !== "todos") return false;
@@ -818,8 +816,7 @@ predicate: (query) => {
     return data?.some((todo) => todo.createdAt > fiveMinutesAgo) ?? false;
   }
 })`}
-                </code>
-              </pre>
+              />
             </TooltipContent>
           </Tooltip>
 
@@ -830,13 +827,13 @@ predicate: (query) => {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{`invalidateQueries({ queryKey: ["list-B"] })`}</p>
+              <CodeBlock code={`invalidateQueries({ queryKey: ["list-B"] })`} />
             </TooltipContent>
           </Tooltip>
         </div>
       </div>
 
-      <div className="mt-6 p-3 bg-gray-100 dark:bg-gray-800 rounded text-sm">
+      <div className="mt-6 p-3 bg-gray-100 dark:bg-muted rounded text-sm">
         <p className="font-medium mb-2">How predicate invalidation works:</p>
         <ol className="list-decimal list-inside space-y-1">
           <li>
