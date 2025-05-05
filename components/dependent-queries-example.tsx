@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { CodeBlock } from "./code-block";
 
 interface User {
   id: number;
@@ -207,6 +208,21 @@ export default function DependentQueriesExample() {
             )}
           </div>
         </div>
+
+        <CodeBlock
+          className="mt-4"
+          code={`  const {
+    data: posts,
+    isLoading: isLoadingPosts,
+    isError: isErrorPosts,
+    error: errorPosts,
+    isFetching: isFetchingPosts,
+  } = useQuery({
+    queryKey: ["posts", selectedUserId],
+    queryFn: () => fetchPostsByUser(selectedUserId!),
+    enabled: !!selectedUserId, // Only run this query if we have a selectedUserId
+  });`}
+        />
 
         <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
           <p className="font-medium mb-2">How dependent queries work:</p>

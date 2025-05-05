@@ -236,7 +236,6 @@ export default function InvalidationExample() {
   );
 }
 
-// Basic invalidation example component
 function BasicInvalidationExample() {
   const [newTodoTitle, setNewTodoTitle] = useState("");
   const queryClient = useQueryClient();
@@ -342,7 +341,7 @@ function BasicInvalidationExample() {
         </div>
       )}
 
-      <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm">
+      <div className="mt-4 p-4 bg-gray-100 dark:bg-muted rounded text-sm">
         <p className="font-medium mb-2">How invalidation works:</p>
         <ol className="list-decimal list-inside space-y-1">
           <li>
@@ -833,7 +832,7 @@ predicate: (query) => {
         </div>
       </div>
 
-      <div className="mt-6 p-3 bg-gray-100 dark:bg-muted rounded text-sm">
+      <div className="mt-6 p-4 bg-gray-100 dark:bg-muted rounded text-sm">
         <p className="font-medium mb-2">How predicate invalidation works:</p>
         <ol className="list-decimal list-inside space-y-1">
           <li>

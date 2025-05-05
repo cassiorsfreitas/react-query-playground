@@ -17,6 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CodeBlock } from "./code-block";
 
 interface Product {
   id: number;
@@ -290,7 +291,7 @@ export default function SuspenseExample() {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="rounded-md border border-input bg-muted px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 <option value="electronics">Electronics</option>
                 <option value="clothing">Clothing</option>
@@ -334,8 +335,8 @@ export default function SuspenseExample() {
             Suspense mode leverages React&apos;s Suspense feature to handle
             loading states and Error Boundaries for error handling.
           </p>
-          <pre className="bg-background p-2 rounded text-xs overflow-x-auto">
-            {`// Suspense mode
+          <CodeBlock
+            code={`// Suspense mode
 <ErrorBoundary FallbackComponent={ErrorFallback}>
   <Suspense fallback={<LoadingSpinner />}>
     <SuspenseProducts />
@@ -347,7 +348,7 @@ const { data } = useSuspenseQuery({
   queryKey: ["products"],
   queryFn: fetchProducts
 })`}
-          </pre>
+          />
         </div>
       </CardFooter>
     </Card>

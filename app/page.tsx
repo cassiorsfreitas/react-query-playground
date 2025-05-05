@@ -1,6 +1,11 @@
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Lightbulb } from "lucide-react";
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto flex flex-col gap-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="border rounded-lg p-6 ">
           <h2 className="text-xl font-semibold mb-2">Core Features</h2>
@@ -69,20 +74,27 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-12 p-6 border rounded-lg bg-muted/30">
+      <Alert className="rounded-2xl border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10">
+        <Lightbulb className="h-8 w-8" />
+        <AlertDescription>
+          It is highly recommended to explore the examples with the TanStack
+          DevTools enabled. This will give you deeper insights into what&apos;s
+          happening under the hood, such as query states, cache updates, and
+          background refetching, making it easier to understand how React Query
+          works in practice.
+        </AlertDescription>
+      </Alert>
+
+      <div className="p-6 border rounded-lg bg-muted/30">
         <h2 className="text-xl font-semibold mb-4">Getting Started</h2>
         <p className="mb-4">
           Navigate through the examples using the sidebar. Each example
           demonstrates a specific feature of React Query with practical use
           cases.
         </p>
-        <p>
-          It is highly recommended to explore the examples with the{" "}
-          <strong>TanStack DevTools</strong> enabled. This will give you deeper
-          insights into what&apos;s happening under the hood, such as query
-          states, cache updates, and background refetching, making it easier to
-          understand how React Query works in practice.
-        </p>
+        <Link href="/basic">
+          <Button variant="outline">Explore Examples</Button>
+        </Link>
       </div>
     </div>
   );

@@ -5,16 +5,16 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "./code-block";
-import { AlertCircle, CheckCircle, Code, Lightbulb } from "lucide-react";
+import { CheckCircle, Code, Lightbulb } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useCodeTheme } from "./theme-code-provider";
 
+// Code examples
 const QUERY_KEYS_FACTORY = `export const queryKeys = {
   todos: ["todos"] as const,
   todoList: (list: "A" | "B") => [...queryKeys.todos, \`list-\${list}\`] as const,
@@ -293,10 +293,64 @@ export default function BestPracticesExample() {
   const [activeTab, setActiveTab] = useState("query-keys");
   const { codeTheme } = useCodeTheme();
 
+  // Reusable section components for consistent layout
+  const BenefitsList = ({
+    title,
+    items,
+  }: {
+    title: string;
+    items: string[];
+  }) => (
+    <div className="space-y-2">
+      <h3 className="text-lg font-medium">{title}</h3>
+      <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+
+  const RecommendedPattern = ({
+    title,
+    description,
+    code,
+  }: {
+    title: string;
+    description: string;
+    code: string;
+  }) => (
+    <div className="rounded-md bg-muted p-4">
+      <h3 className="font-medium mb-2 flex items-center gap-2">
+        <CheckCircle className="h-4 w-4 text-green-500" />
+        {title}
+      </h3>
+      <p className="text-sm text-muted-foreground mb-4">{description}</p>
+      <CodeBlock code={code} theme={codeTheme} />
+    </div>
+  );
+
+  const KeyBenefits = ({
+    items,
+  }: {
+    items: Array<{ title: string; description: string }>;
+  }) => (
+    <div className="mt-4 p-4 bg-gray-100 dark:bg-muted rounded text-sm">
+      <p className="font-medium mb-2">Key benefits:</p>
+      <ul className="list-disc list-inside space-y-1">
+        {items.map((item, index) => (
+          <li key={index}>
+            <strong>{item.title}:</strong> {item.description}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   return (
-    <div className="space-y-6">
-      <Alert>
-        <Lightbulb className="h-4 w-4" />
+    <div className="space-y-6 max-w-4xl mx-auto">
+      <Alert className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800">
+        <Lightbulb className="h-4 w-4 text-amber-500" />
         <AlertTitle>Best Practices</AlertTitle>
         <AlertDescription>
           Following these patterns will help you build maintainable applications
@@ -305,7 +359,7 @@ export default function BestPracticesExample() {
       </Alert>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-3 md:grid-cols-6">
+        <TabsList className="grid grid-cols-3 md:grid-cols-6 mb-4">
           <TabsTrigger value="query-keys">Query Keys</TabsTrigger>
           <TabsTrigger value="query-functions">Query Functions</TabsTrigger>
           <TabsTrigger value="custom-hooks">Custom Hooks</TabsTrigger>
@@ -316,7 +370,7 @@ export default function BestPracticesExample() {
 
         <TabsContent value="query-keys" className="space-y-4">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Code className="h-5 w-5" /> Query Key Factories
               </CardTitle>
@@ -325,74 +379,49 @@ export default function BestPracticesExample() {
                 keys across your application
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">
-                  Why use query key factories?
-                </h3>
-                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                  <li>Prevents typos and inconsistencies in query keys</li>
-                  <li>Makes refactoring easier - change keys in one place</li>
-                  <li>Improves type safety with TypeScript</li>
-                  <li>Makes query invalidation more reliable</li>
-                </ul>
-              </div>
+            <CardContent className="space-y-6 pt-2">
+              <BenefitsList
+                title="Why use query key factories?"
+                items={[
+                  "Prevents typos and inconsistencies in query keys",
+                  "Makes refactoring easier - change keys in one place",
+                  "Improves type safety with TypeScript",
+                  "Makes query invalidation more reliable",
+                ]}
+              />
 
-              <div className="rounded-md bg-muted p-4">
-                <h3 className="font-medium mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Recommended Pattern
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Create a dedicated file for query keys that exports a factory
-                  object with methods for generating keys.
-                </p>
-                <CodeBlock code={QUERY_KEYS_FACTORY} theme={codeTheme} />
-              </div>
+              <RecommendedPattern
+                title="Recommended Pattern"
+                description="Create a dedicated file for query keys that exports a factory object with methods for generating keys."
+                code={QUERY_KEYS_FACTORY}
+              />
 
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
-                <p className="font-medium mb-2">Key benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Better Type Safety:</strong> Using{" "}
-                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                      as const
-                    </code>{" "}
-                    with array keys ensures proper TypeScript typing and
-                    prevents accidental key modifications.
-                  </li>
-                  <li>
-                    <strong>Improved Invalidation Hierarchy:</strong> Nesting
-                    keys like{" "}
-                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                      todoItem
-                    </code>{" "}
-                    extending{" "}
-                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                      todos
-                    </code>{" "}
-                    creates a hierarchy that makes targeted invalidation easier.
-                  </li>
-                </ul>
-              </div>
+              <KeyBenefits
+                items={[
+                  {
+                    title: "Better Type Safety",
+                    description:
+                      'Using "as const" with array keys ensures proper TypeScript typing and prevents accidental key modifications.',
+                  },
+                  {
+                    title: "Improved Invalidation Hierarchy",
+                    description:
+                      'Nesting keys like "todoItem" extending "todos" creates a hierarchy that makes targeted invalidation easier.',
+                  },
+                  {
+                    title: "Colocate",
+                    description:
+                      "Query keys are used for deduplication, caching, and invalidation. Consider keeping the keys next to their respective queries, co-located in a feature directory.",
+                  },
+                ]}
+              />
             </CardContent>
-            <CardFooter className="border-t pt-6">
-              <Alert variant="destructive" className="w-full">
-                <AlertCircle className="h-4 w-4" />
-                <AlertTitle>Important</AlertTitle>
-                <AlertDescription>
-                  Query keys are used for deduplication, caching, and
-                  invalidation. Consistent key structure is crucial for proper
-                  cache management.
-                </AlertDescription>
-              </Alert>
-            </CardFooter>
           </Card>
         </TabsContent>
 
         <TabsContent value="query-functions" className="space-y-4">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Code className="h-5 w-5" /> Query Function Abstraction
               </CardTitle>
@@ -401,62 +430,44 @@ export default function BestPracticesExample() {
                 maintainability
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">
-                  Why abstract query functions?
-                </h3>
-                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                  <li>
-                    Separates concerns - API logic stays out of components
-                  </li>
-                  <li>
-                    Makes testing easier - mock API functions independently
-                  </li>
-                  <li>Enables reuse across multiple components</li>
-                  <li>Simplifies error handling and request cancellation</li>
-                </ul>
-              </div>
+            <CardContent className="space-y-6 pt-2">
+              <BenefitsList
+                title="Why abstract query functions?"
+                items={[
+                  "Separates concerns - API logic stays out of components",
+                  "Makes testing easier - mock API functions independently",
+                  "Enables reuse across multiple components",
+                  "Simplifies error handling and request cancellation",
+                ]}
+              />
 
-              <div className="rounded-md bg-muted p-4">
-                <h3 className="font-medium mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Recommended Pattern
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Create a dedicated API module that handles all data fetching
-                  logic, then use it in your query functions.
-                </p>
-                <CodeBlock
-                  code={QUERY_FUNCTION_ABSTRACTION}
-                  theme={codeTheme}
-                />
-              </div>
+              <RecommendedPattern
+                title="Recommended Pattern"
+                description="Create a dedicated API module that handles all data fetching logic, then use it in your query functions."
+                code={QUERY_FUNCTION_ABSTRACTION}
+              />
 
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
-                <p className="font-medium mb-2">Key benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Automatic Cancellation:</strong> Passing the{" "}
-                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                      signal
-                    </code>{" "}
-                    parameter enables query cancellation when components unmount
-                    or queries are invalidated.
-                  </li>
-                  <li>
-                    <strong>Centralized Error Handling:</strong> Ensures
-                    consistent error responses across your app.
-                  </li>
-                </ul>
-              </div>
+              <KeyBenefits
+                items={[
+                  {
+                    title: "Automatic Cancellation",
+                    description:
+                      "Passing the signal parameter enables query cancellation when components unmount or queries are invalidated.",
+                  },
+                  {
+                    title: "Centralized Error Handling",
+                    description:
+                      "Ensures consistent error responses across your app.",
+                  },
+                ]}
+              />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="custom-hooks" className="space-y-4">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Code className="h-5 w-5" /> Custom Query Hooks
               </CardTitle>
@@ -464,49 +475,44 @@ export default function BestPracticesExample() {
                 Create domain-specific hooks that encapsulate query logic
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Why use custom hooks?</h3>
-                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                  <li>Encapsulates query and mutation logic in one place</li>
-                  <li>Makes components cleaner and more focused on UI</li>
-                  <li>Enables reuse of complex query patterns</li>
-                  <li>Simplifies testing of data fetching logic</li>
-                </ul>
-              </div>
+            <CardContent className="space-y-6 pt-2">
+              <BenefitsList
+                title="Why use custom hooks?"
+                items={[
+                  "Encapsulates query and mutation logic in one place",
+                  "Makes components cleaner and more focused on UI",
+                  "Enables reuse of complex query patterns",
+                  "Simplifies testing of data fetching logic",
+                ]}
+              />
 
-              <div className="rounded-md bg-muted p-4">
-                <h3 className="font-medium mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Recommended Pattern
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Create custom hooks for each entity or feature in your
-                  application, combining queries and mutations.
-                </p>
-                <CodeBlock code={CUSTOM_HOOKS} theme={codeTheme} />
-              </div>
+              <RecommendedPattern
+                title="Recommended Pattern"
+                description="Create custom hooks for each entity or feature in your application, combining queries and mutations."
+                code={CUSTOM_HOOKS}
+              />
 
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
-                <p className="font-medium mb-2">Key benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Clean API:</strong> Custom hooks let components
-                    interact with your data layer cleanly.
-                  </li>
-                  <li>
-                    <strong>Scoped Logic:</strong> Combining related queries and
-                    mutations in the same hook helps manage related state.
-                  </li>
-                </ul>
-              </div>
+              <KeyBenefits
+                items={[
+                  {
+                    title: "Clean API",
+                    description:
+                      "Custom hooks let components interact with your data layer cleanly.",
+                  },
+                  {
+                    title: "Scoped Logic",
+                    description:
+                      "Combining related queries and mutations in the same hook helps manage related state.",
+                  },
+                ]}
+              />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="error-handling" className="space-y-4">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Code className="h-5 w-5" /> Error Handling Strategies
               </CardTitle>
@@ -514,53 +520,44 @@ export default function BestPracticesExample() {
                 Implement robust error handling for a better user experience
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">
-                  Why focus on error handling?
-                </h3>
-                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                  <li>
-                    Improves user experience by providing clear error messages
-                  </li>
-                  <li>Prevents silent failures that can confuse users</li>
-                  <li>Enables recovery strategies like retries or fallbacks</li>
-                  <li>Helps with debugging and monitoring in production</li>
-                </ul>
-              </div>
+            <CardContent className="space-y-6 pt-2">
+              <BenefitsList
+                title="Why focus on error handling?"
+                items={[
+                  "Improves user experience by providing clear error messages",
+                  "Prevents silent failures that can confuse users",
+                  "Enables recovery strategies like retries or fallbacks",
+                  "Helps with debugging and monitoring in production",
+                ]}
+              />
 
-              <div className="rounded-md bg-muted p-4">
-                <h3 className="font-medium mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Recommended Pattern
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Combine global error handling with component-specific error UI
-                  when needed.
-                </p>
-                <CodeBlock code={ERROR_HANDLING} theme={codeTheme} />
-              </div>
+              <RecommendedPattern
+                title="Recommended Pattern"
+                description="Combine global error handling with component-specific error UI when needed."
+                code={ERROR_HANDLING}
+              />
 
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
-                <p className="font-medium mb-2">Key benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Global Safety:</strong> Global error handling
-                    ensures all unexpected errors are caught and displayed.
-                  </li>
-                  <li>
-                    <strong>Contextual Feedback:</strong> Component-specific
-                    error handling allows for contextual messages and recovery.
-                  </li>
-                </ul>
-              </div>
+              <KeyBenefits
+                items={[
+                  {
+                    title: "Global Safety",
+                    description:
+                      "Global error handling ensures all unexpected errors are caught and displayed.",
+                  },
+                  {
+                    title: "Contextual Feedback",
+                    description:
+                      "Component-specific error handling allows for contextual messages and recovery.",
+                  },
+                ]}
+              />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="optimistic" className="space-y-4">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Code className="h-5 w-5" /> Optimistic Updates
               </CardTitle>
@@ -568,60 +565,44 @@ export default function BestPracticesExample() {
                 Update the UI immediately before the server confirms the change
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">
-                  Why use optimistic updates?
-                </h3>
-                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                  <li>Creates a more responsive user experience</li>
-                  <li>
-                    Reduces perceived latency, especially on slower connections
-                  </li>
-                  <li>Provides immediate feedback for user actions</li>
-                  <li>Can automatically roll back on errors</li>
-                </ul>
-              </div>
+            <CardContent className="space-y-6 pt-2">
+              <BenefitsList
+                title="Why use optimistic updates?"
+                items={[
+                  "Creates a more responsive user experience",
+                  "Reduces perceived latency, especially on slower connections",
+                  "Provides immediate feedback for user actions",
+                  "Can automatically roll back on errors",
+                ]}
+              />
 
-              <div className="rounded-md bg-muted p-4">
-                <h3 className="font-medium mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Recommended Pattern
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Use the mutation lifecycle hooks to update the cache
-                  optimistically and roll back on errors.
-                </p>
-                <CodeBlock code={OPTIMISTIC_UPDATES} theme={codeTheme} />
-              </div>
+              <RecommendedPattern
+                title="Recommended Pattern"
+                description="Use the mutation lifecycle hooks to update the cache optimistically and roll back on errors."
+                code={OPTIMISTIC_UPDATES}
+              />
 
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
-                <p className="font-medium mb-2">Key benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Immediate Feedback:</strong> The{" "}
-                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                      onMutate
-                    </code>{" "}
-                    callback lets you update the cache optimistically before the
-                    mutation completes.
-                  </li>
-                  <li>
-                    <strong>Rollback Support:</strong> The{" "}
-                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                      onError
-                    </code>{" "}
-                    callback provides automatic rollback if the mutation fails.
-                  </li>
-                </ul>
-              </div>
+              <KeyBenefits
+                items={[
+                  {
+                    title: "Immediate Feedback",
+                    description:
+                      "The onMutate callback lets you update the cache optimistically before the mutation completes.",
+                  },
+                  {
+                    title: "Rollback Support",
+                    description:
+                      "The onError callback provides automatic rollback if the mutation fails.",
+                  },
+                ]}
+              />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="prefetching" className="space-y-4">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Code className="h-5 w-5" /> Prefetching Strategies
               </CardTitle>
@@ -630,48 +611,42 @@ export default function BestPracticesExample() {
                 performance
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Why prefetch data?</h3>
-                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-                  <li>
-                    Reduces loading times for predictable navigation paths
-                  </li>
-                  <li>Creates a smoother user experience with less waiting</li>
-                  <li>Can load data during idle periods</li>
-                  <li>Makes applications feel faster and more responsive</li>
-                </ul>
-              </div>
+            <CardContent className="space-y-6 pt-2">
+              <BenefitsList
+                title="Why prefetch data?"
+                items={[
+                  "Reduces loading times for predictable navigation paths",
+                  "Creates a smoother user experience with less waiting",
+                  "Can load data during idle periods",
+                  "Makes applications feel faster and more responsive",
+                ]}
+              />
 
-              <div className="rounded-md bg-muted p-4">
-                <h3 className="font-medium mb-2 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Recommended Patterns
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Implement different prefetching strategies based on user
-                  behavior and application needs.
-                </p>
-                <CodeBlock code={PREFETCHING_STRATEGIES} theme={codeTheme} />
-              </div>
+              <RecommendedPattern
+                title="Recommended Patterns"
+                description="Implement different prefetching strategies based on user behavior and application needs."
+                code={PREFETCHING_STRATEGIES}
+              />
 
-              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
-                <p className="font-medium mb-2">Key benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <strong>Fast Initial Load:</strong> Prefetching on page load
-                    ensures common data is ready immediately.
-                  </li>
-                  <li>
-                    <strong>Instant Navigation:</strong> Prefetching on hover
-                    improves perceived speed during link interaction.
-                  </li>
-                  <li>
-                    <strong>Smooth Pagination:</strong> Prefetching the next
-                    page creates seamless user experiences.
-                  </li>
-                </ul>
-              </div>
+              <KeyBenefits
+                items={[
+                  {
+                    title: "Fast Initial Load",
+                    description:
+                      "Prefetching on page load ensures common data is ready immediately.",
+                  },
+                  {
+                    title: "Instant Navigation",
+                    description:
+                      "Prefetching on hover improves perceived speed during link interaction.",
+                  },
+                  {
+                    title: "Smooth Pagination",
+                    description:
+                      "Prefetching the next page creates seamless user experiences.",
+                  },
+                ]}
+              />
             </CardContent>
           </Card>
         </TabsContent>
