@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -13,14 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { CodeBlock } from "./code-block";
 import { Badge } from "@/components/ui/badge";
-import {
-  CheckCircle,
-  Code,
-  Play,
-  XCircle,
-  AlertCircle,
-  Clock,
-} from "lucide-react";
+import { CheckCircle, Play, XCircle, AlertCircle, Clock } from "lucide-react";
 
 const COMPONENT_TEST_CODE = `// UserProfile.test.tsx
 import { render, screen } from '@testing-library/react'
