@@ -16,7 +16,6 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/hooks/use-toast";
 
 interface Post {
@@ -107,7 +106,6 @@ export default function OptimisticUpdatesExample() {
         variant: "destructive",
         title: "Error liking post",
         description: "The like operation failed and was rolled back.",
-        action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     },
     onSettled: () => {

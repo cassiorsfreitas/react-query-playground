@@ -350,27 +350,30 @@ export default function BestPracticesExample() {
                 <CodeBlock code={QUERY_KEYS_FACTORY} theme={codeTheme} />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Key benefits:</h3>
-                <p className="text-muted-foreground">
-                  Using{" "}
-                  <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                    as const
-                  </code>{" "}
-                  with array keys ensures proper TypeScript typing and prevents
-                  accidental key modifications.
-                </p>
-                <p className="text-muted-foreground">
-                  Nesting keys (like{" "}
-                  <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                    todoItem
-                  </code>{" "}
-                  extending{" "}
-                  <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                    todos
-                  </code>
-                  ) creates a hierarchy that makes targeted invalidation easier.
-                </p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
+                <p className="font-medium mb-2">Key benefits:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <strong>Better Type Safety:</strong> Using{" "}
+                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                      as const
+                    </code>{" "}
+                    with array keys ensures proper TypeScript typing and
+                    prevents accidental key modifications.
+                  </li>
+                  <li>
+                    <strong>Improved Invalidation Hierarchy:</strong> Nesting
+                    keys like{" "}
+                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                      todoItem
+                    </code>{" "}
+                    extending{" "}
+                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                      todos
+                    </code>{" "}
+                    creates a hierarchy that makes targeted invalidation easier.
+                  </li>
+                </ul>
               </div>
             </CardContent>
             <CardFooter className="border-t pt-6">
@@ -430,20 +433,22 @@ export default function BestPracticesExample() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Key benefits:</h3>
-                <p className="text-muted-foreground">
-                  Passing the{" "}
-                  <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                    signal
-                  </code>{" "}
-                  parameter enables automatic query cancellation when components
-                  unmount or queries are invalidated.
-                </p>
-                <p className="text-muted-foreground">
-                  Centralizing error handling in the API layer ensures
-                  consistent error responses across your application.
-                </p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
+                <p className="font-medium mb-2">Key benefits:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <strong>Automatic Cancellation:</strong> Passing the{" "}
+                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                      signal
+                    </code>{" "}
+                    parameter enables query cancellation when components unmount
+                    or queries are invalidated.
+                  </li>
+                  <li>
+                    <strong>Centralized Error Handling:</strong> Ensures
+                    consistent error responses across your app.
+                  </li>
+                </ul>
               </div>
             </CardContent>
           </Card>
@@ -482,16 +487,18 @@ export default function BestPracticesExample() {
                 <CodeBlock code={CUSTOM_HOOKS} theme={codeTheme} />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Key benefits:</h3>
-                <p className="text-muted-foreground">
-                  Custom hooks create a clean API for components to interact
-                  with your data layer.
-                </p>
-                <p className="text-muted-foreground">
-                  Combining related queries and mutations in the same hook makes
-                  it easier to manage related state.
-                </p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
+                <p className="font-medium mb-2">Key benefits:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <strong>Clean API:</strong> Custom hooks let components
+                    interact with your data layer cleanly.
+                  </li>
+                  <li>
+                    <strong>Scoped Logic:</strong> Combining related queries and
+                    mutations in the same hook helps manage related state.
+                  </li>
+                </ul>
               </div>
             </CardContent>
           </Card>
@@ -534,16 +541,18 @@ export default function BestPracticesExample() {
                 <CodeBlock code={ERROR_HANDLING} theme={codeTheme} />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Key benefits:</h3>
-                <p className="text-muted-foreground">
-                  Global error handling ensures all unexpected errors are caught
-                  and displayed.
-                </p>
-                <p className="text-muted-foreground">
-                  Component-specific error handling allows for contextual error
-                  messages and recovery options.
-                </p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
+                <p className="font-medium mb-2">Key benefits:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <strong>Global Safety:</strong> Global error handling
+                    ensures all unexpected errors are caught and displayed.
+                  </li>
+                  <li>
+                    <strong>Contextual Feedback:</strong> Component-specific
+                    error handling allows for contextual messages and recovery.
+                  </li>
+                </ul>
               </div>
             </CardContent>
           </Card>
@@ -586,23 +595,25 @@ export default function BestPracticesExample() {
                 <CodeBlock code={OPTIMISTIC_UPDATES} theme={codeTheme} />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Key benefits:</h3>
-                <p className="text-muted-foreground">
-                  The{" "}
-                  <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                    onMutate
-                  </code>{" "}
-                  callback lets you update the cache before the mutation
-                  completes.
-                </p>
-                <p className="text-muted-foreground">
-                  The{" "}
-                  <code className="text-xs bg-muted px-1 py-0.5 rounded">
-                    onError
-                  </code>{" "}
-                  callback provides automatic rollback if the mutation fails.
-                </p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
+                <p className="font-medium mb-2">Key benefits:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <strong>Immediate Feedback:</strong> The{" "}
+                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                      onMutate
+                    </code>{" "}
+                    callback lets you update the cache optimistically before the
+                    mutation completes.
+                  </li>
+                  <li>
+                    <strong>Rollback Support:</strong> The{" "}
+                    <code className="text-xs bg-muted px-1 py-0.5 rounded">
+                      onError
+                    </code>{" "}
+                    callback provides automatic rollback if the mutation fails.
+                  </li>
+                </ul>
               </div>
             </CardContent>
           </Card>
@@ -644,20 +655,22 @@ export default function BestPracticesExample() {
                 <CodeBlock code={PREFETCHING_STRATEGIES} theme={codeTheme} />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Key benefits:</h3>
-                <p className="text-muted-foreground">
-                  Prefetching on page load ensures common data is available
-                  immediately.
-                </p>
-                <p className="text-muted-foreground">
-                  Prefetching on hover makes navigation feel instant when users
-                  interact with links.
-                </p>
-                <p className="text-muted-foreground">
-                  Prefetching the next page of data creates seamless pagination
-                  experiences.
-                </p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-muted rounded text-sm text-left">
+                <p className="font-medium mb-2">Key benefits:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <strong>Fast Initial Load:</strong> Prefetching on page load
+                    ensures common data is ready immediately.
+                  </li>
+                  <li>
+                    <strong>Instant Navigation:</strong> Prefetching on hover
+                    improves perceived speed during link interaction.
+                  </li>
+                  <li>
+                    <strong>Smooth Pagination:</strong> Prefetching the next
+                    page creates seamless user experiences.
+                  </li>
+                </ul>
               </div>
             </CardContent>
           </Card>

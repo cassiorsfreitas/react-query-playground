@@ -1,8 +1,8 @@
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto w-full">
+    <div className="max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border rounded-lg p-6 hover:border-primary/50 transition-colors">
+        <div className="border rounded-lg p-6 ">
           <h2 className="text-xl font-semibold mb-2">Core Features</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Explore the fundamental capabilities of React Query
@@ -31,7 +31,7 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="border rounded-lg p-6 hover:border-primary/50 transition-colors">
+        <div className="border rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-2">Advanced Features</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Dive deeper into React Query&apos;s advanced capabilities

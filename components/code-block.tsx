@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,7 +8,12 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { unified } from "unified";
 import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
-import { getSingletonHighlighter } from "shiki";
+import {
+  BundledHighlighterOptions,
+  BundledLanguage,
+  BundledTheme,
+  getSingletonHighlighter,
+} from "shiki";
 
 interface CodeBlockProps {
   code: string;
@@ -26,35 +32,43 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const highlightCode = async () => {
-      setIsLoading(true);
       try {
         const processor = unified()
           .use(rehypeParse, { fragment: true })
           .use(rehypePrettyCode, {
             theme,
             keepBackground: true,
-            getSingletonHighlighter: (options) =>
+            getSingletonHighlighter: (
+              options:
+                | Partial<
+                    BundledHighlighterOptions<BundledLanguage, BundledTheme>
+                  >
+                | undefined
+            ) =>
               getSingletonHighlighter({
                 ...options,
                 langs: [language],
               }),
-            onVisitLine(node) {
+            onVisitLine(node: { children: string | any[] }) {
               if (node.children.length === 0) {
                 node.children = [{ type: "text", value: " " }];
               }
             },
-            onVisitHighlightedLine(node) {
+            onVisitHighlightedLine(node: {
+              properties: { className: string[] };
+            }) {
               node.properties.className = ["highlighted"];
             },
-            onVisitHighlightedWord(node) {
+            onVisitHighlightedWord(node: {
+              properties: { className: string[] };
+            }) {
               node.properties.className = ["word-highlighted"];
             },
             lineNumbers: showLineNumbers,
-          })
+          } as any)
           .use(rehypeStringify);
 
         const codeHtml = `<pre><code class="language-${language}">${code}</code></pre>`;
@@ -66,8 +80,6 @@ export function CodeBlock({
         setHighlightedCode(
           `<pre><code class="language-${language}">${code}</code></pre>`
         );
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -82,22 +94,14 @@ export function CodeBlock({
 
   return (
     <div className={cn("relative group", className)}>
-      {isLoading ? (
-        <div className="p-4 rounded-md bg-background border text-sm overflow-x-auto animate-pulse">
-          <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-muted rounded w-1/2 mb-2"></div>
-          <div className="h-4 bg-muted rounded w-2/3"></div>
-        </div>
-      ) : (
-        <div
-          className={cn(
-            "rounded-md bg-background border text-sm overflow-x-auto",
-            "text-foreground/90 font-mono",
-            "dark:bg-gray-950"
-          )}
-          dangerouslySetInnerHTML={{ __html: highlightedCode }}
-        />
-      )}
+      <div
+        className={cn(
+          "rounded-md bg-background border text-sm overflow-x-auto",
+          "text-foreground/90 font-mono",
+          "dark:bg-gray-950"
+        )}
+        dangerouslySetInnerHTML={{ __html: highlightedCode }}
+      />
       <button
         onClick={copyToClipboard}
         className={cn(
