@@ -382,6 +382,7 @@ function AdvancedInvalidationExample() {
 
   const listAQuery = useQuery({
     queryKey: ["todos", "list-A"],
+    // queryKey: queryKeys.todoList("A"),
     queryFn: () => fetchAdvancedTodos("A"),
   });
 
@@ -400,6 +401,7 @@ function AdvancedInvalidationExample() {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos", "list-A"] });
+      // queryClient.invalidateQueries({ queryKey: queryKeys.todoList("A") });
       setNewTodoATitle("");
       toast({
         title: "Todo added to List A",
