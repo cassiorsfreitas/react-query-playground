@@ -33,6 +33,14 @@ export function CodeBlock({
   const [copied, setCopied] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState<string>("");
 
+  function escapeHtml(html: string) {
+    return html
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
   useEffect(() => {
     const highlightCode = async () => {
       try {
@@ -71,7 +79,8 @@ export function CodeBlock({
           } as any)
           .use(rehypeStringify);
 
-        const codeHtml = `<pre><code class="language-${language}">${code}</code></pre>`;
+        const escapedCode = escapeHtml(code);
+        const codeHtml = `<pre><code class="language-${language}">${escapedCode}</code></pre>`;
 
         const result = await processor.process(codeHtml);
         setHighlightedCode(String(result.value));
