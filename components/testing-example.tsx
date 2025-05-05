@@ -602,45 +602,6 @@ export default function TestRunner() {
           </TabsContent>
         </Tabs>
       </CardContent>
-      <CardFooter>
-        <div className="w-full p-4 bg-muted rounded-md">
-          <h3 className="font-medium mb-2">Running Tests in a Real Project</h3>
-          <ul className="text-sm text-muted-foreground space-y-2">
-            <li className="flex items-start gap-2">
-              <Code className="h-4 w-4 mt-0.5 flex-shrink-0" />
-              <span>
-                <strong>Setup:</strong> Install Jest and React Testing Library
-                with{" "}
-                <code>
-                  npm install --save-dev jest @testing-library/react
-                  @testing-library/jest-dom jest-environment-jsdom
-                </code>
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Code className="h-4 w-4 mt-0.5 flex-shrink-0" />
-              <span>
-                <strong>Configure:</strong> Add Jest configuration to your
-                package.json or jest.config.js
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Code className="h-4 w-4 mt-0.5 flex-shrink-0" />
-              <span>
-                <strong>Run:</strong> Execute tests with <code>npm test</code>{" "}
-                or <code>npx jest</code>
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Code className="h-4 w-4 mt-0.5 flex-shrink-0" />
-              <span>
-                <strong>Watch Mode:</strong> Use <code>npx jest --watch</code>{" "}
-                for interactive testing during development
-              </span>
-            </li>
-          </ul>
-        </div>
-      </CardFooter>
     </Card>
   );
 }

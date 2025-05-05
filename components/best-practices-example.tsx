@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock } from "./code-block";
-import { CheckCircle, Code, Lightbulb } from "lucide-react";
+import { AlertOctagon, CheckCircle, Code } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useCodeTheme } from "./theme-code-provider";
 
@@ -349,8 +349,8 @@ export default function BestPracticesExample() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <Alert className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800">
-        <Lightbulb className="h-4 w-4 text-amber-500" />
+      <Alert className="callout my-4 px-5 py-4 overflow-hidden rounded-2xl flex gap-3 border border-zinc-500/20 bg-zinc-50/50 dark:border-zinc-500/30 dark:bg-zinc-500/10">
+        <AlertOctagon className="h-4 w-4 text-amber-500" />
         <AlertTitle>Best Practices</AlertTitle>
         <AlertDescription>
           Following these patterns will help you build maintainable applications

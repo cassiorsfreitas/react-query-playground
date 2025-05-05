@@ -12,6 +12,10 @@ import {
   Zap,
   Home,
   BookOpen,
+  ArrowsUpFromLine,
+  ShieldX,
+  Unplug,
+  Workflow,
 } from "lucide-react";
 
 import {
@@ -90,7 +94,7 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/dependent")}>
                   <Link href="/dependent">
-                    <Layers className="h-4 w-4" />
+                    <Workflow className="h-4 w-4" />
                     <span>Dependent Queries</span>
                   </Link>
                 </SidebarMenuButton>
@@ -98,7 +102,7 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/optimistic")}>
                   <Link href="/optimistic">
-                    <Zap className="h-4 w-4" />
+                    <ArrowsUpFromLine className="h-4 w-4" />
                     <span>Optimistic Updates</span>
                   </Link>
                 </SidebarMenuButton>
@@ -138,7 +142,7 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/cancellation")}>
                   <Link href="/cancellation">
-                    <XCircle className="h-4 w-4" />
+                    <ShieldX className="h-4 w-4" />
                     <span>Query Cancellation</span>
                   </Link>
                 </SidebarMenuButton>
@@ -154,7 +158,7 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/websocket")}>
                   <Link href="/websocket">
-                    <Radio className="h-4 w-4" />
+                    <Unplug className="h-4 w-4" />
                     <span>WebSocket/Realtime</span>
                   </Link>
                 </SidebarMenuButton>
