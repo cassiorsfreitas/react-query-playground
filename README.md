@@ -1,4 +1,5 @@
 # React Query Playground
+[Navigate through the examples](https://react-query-playground.cassiorsfreitas.com/) using the sidebar. Each example demonstrates a specific feature of React Query with practical use cases.
 
 A feature-rich playground for exploring the full power of [TanStack React Query](https://tanstack.com/query/latest). This project provides hands-on examples for both beginners and advanced users to understand how React Query works in real-world scenarios.
 
