@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React Query Playground
 
-## Getting Started
+A feature-rich playground for exploring the full power of [TanStack React Query](https://tanstack.com/query/latest). This project provides hands-on examples for both beginners and advanced users to understand how React Query works in real-world scenarios.
 
-First, run the development server:
+![React Query Logo](https://raw.githubusercontent.com/TanStack/query/main/media/repo-dark.png#gh-dark-mode-only)
+![React Query Logo](https://raw.githubusercontent.com/TanStack/query/main/media/repo-light.png#gh-light-mode-only)
+
+## 🚀 Features
+
+### Core Features
+
+- Basic Queries
+- Refetching Strategies
+- Query Invalidation
+- Dependent Queries
+- Optimistic Updates
+
+### Advanced Features
+
+- Pagination
+- Infinite Queries
+- Prefetching
+- Query Cancellation
+- Suspense Mode
+- WebSocket / Realtime Updates
+- Testing Strategies
+
+## 📸 Screenshot
+
+![screenshot](./public/screenshot.png) <!-- Add your screenshot here -->
+
+## 🧠 Why This Exists
+
+This playground was built to help developers deeply understand how React Query works — from caching and background fetching to advanced workflows like optimistic updates and real-time data with WebSockets.
+
+> 💡 Use the [TanStack DevTools](https://tanstack.com/query/latest/docs/framework/react/devtools) to inspect query caches and debug query states while navigating the examples.
+
+## 📦 Tech Stack
+
+- [Next.js 15](https://nextjs.org/)
+- [React 19](https://react.dev/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Lucide Icons](https://lucide.dev/)
+- [TanStack React Query v5](https://tanstack.com/query/latest)
+- [React Query DevTools](https://tanstack.com/query/latest/docs/framework/react/devtools)
+
+## 🛠️ Getting Started
+
+1. **Clone the repo:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/react-query-playground.git
+cd react-query-playground
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install # or yarn / npm
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Run the development server:**
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Explore the examples:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open your browser and go to http://localhost:3000 — navigate using the sidebar.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🖼️ Project Structure
 
-## Deploy on Vercel
+```bash
+├── app/               # Next.js routes
+├── components/        # Reusable UI elements
+├── hooks/             # Custom hooks using React Query
+├── lib/               # Helper functions
+├── public/            # Static assets (e.g., screenshot.png)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌍 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Feel free to open an issue or a pull request to add examples, fix bugs, or improve documentation.
+
+```bash
+git checkout -b your-feature-branch
+git commit -m "feat: add new example"
+git push origin your-feature-branch
+```
+
+## 📄 License
+
+This project is licensed under the MIT License.
