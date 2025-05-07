@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   BookmarkIcon as Pagination,
   InfinityIcon,
@@ -28,21 +27,37 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCallback } from "react";
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const isMobile = useIsMobile();
+  const { setOpenMobile } = useSidebar();
 
   const isActive = (path: string) => {
     return pathname === path;
   };
 
+  const handleNavigation = useCallback(
+    (path: string) => {
+      if (isMobile) {
+        setOpenMobile(false);
+        setTimeout(() => {
+          router.push(path);
+        }, 100);
+      }
+    },
+    [isMobile, router, setOpenMobile]
+  );
+
   return (
     <Sidebar
       collapsible={isMobile ? "offcanvas" : "icon"}
-      className="[--sheet-duration:150ms]" // Reduce animation duration
+      className="[--sheet-duration:150ms]"
     >
       <SidebarContent>
         <SidebarGroup>
@@ -51,38 +66,32 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/")}
                   tooltip="Home"
+                  onClick={() => handleNavigation("/")}
                 >
-                  <Link href="/">
-                    <Home className="h-4 w-4" />
-                    <span>Home</span>
-                  </Link>
+                  <Home className="h-4 w-4" />
+                  <span>Home</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/basic")}
                   tooltip="Basic Query"
+                  onClick={() => handleNavigation("/basic")}
                 >
-                  <Link href="/basic">
-                    <Zap className="h-4 w-4" />
-                    <span>Basic Query</span>
-                  </Link>
+                  <Zap className="h-4 w-4" />
+                  <span>Basic Query</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/practices")}
                   tooltip="Best Practices"
+                  onClick={() => handleNavigation("/practices")}
                 >
-                  <Link href="/practices">
-                    <BookOpen className="h-4 w-4" />
-                    <span>Best Practices</span>
-                  </Link>
+                  <BookOpen className="h-4 w-4" />
+                  <span>Best Practices</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -95,50 +104,42 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/refetch")}
                   tooltip="Refetch"
+                  onClick={() => handleNavigation("/refetch")}
                 >
-                  <Link href="/refetch">
-                    <Radio className="h-4 w-4" />
-                    <span>Refetch</span>
-                  </Link>
+                  <Radio className="h-4 w-4" />
+                  <span>Refetch</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/invalidation")}
                   tooltip="Invalidation"
+                  onClick={() => handleNavigation("/invalidation")}
                 >
-                  <Link href="/invalidation">
-                    <XCircle className="h-4 w-4" />
-                    <span>Invalidation</span>
-                  </Link>
+                  <XCircle className="h-4 w-4" />
+                  <span>Invalidation</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/dependent")}
                   tooltip="Dependent Queries"
+                  onClick={() => handleNavigation("/dependent")}
                 >
-                  <Link href="/dependent">
-                    <Workflow className="h-4 w-4" />
-                    <span>Dependent Queries</span>
-                  </Link>
+                  <Workflow className="h-4 w-4" />
+                  <span>Dependent Queries</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/optimistic")}
                   tooltip="Optimistic Updates"
+                  onClick={() => handleNavigation("/optimistic")}
                 >
-                  <Link href="/optimistic">
-                    <ArrowsUpFromLine className="h-4 w-4" />
-                    <span>Optimistic Updates</span>
-                  </Link>
+                  <ArrowsUpFromLine className="h-4 w-4" />
+                  <span>Optimistic Updates</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -151,86 +152,72 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/pagination")}
                   tooltip="Pagination"
+                  onClick={() => handleNavigation("/pagination")}
                 >
-                  <Link href="/pagination">
-                    <Pagination className="h-4 w-4" />
-                    <span>Pagination</span>
-                  </Link>
+                  <Pagination className="h-4 w-4" />
+                  <span>Pagination</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/infinite")}
                   tooltip="Infinite Queries"
+                  onClick={() => handleNavigation("/infinite")}
                 >
-                  <Link href="/infinite">
-                    <InfinityIcon className="h-4 w-4" />
-                    <span>Infinite Queries</span>
-                  </Link>
+                  <InfinityIcon className="h-4 w-4" />
+                  <span>Infinite Queries</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/prefetching")}
                   tooltip="Prefetching"
+                  onClick={() => handleNavigation("/prefetching")}
                 >
-                  <Link href="/prefetching">
-                    <Download className="h-4 w-4" />
-                    <span>Prefetching</span>
-                  </Link>
+                  <Download className="h-4 w-4" />
+                  <span>Prefetching</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/cancellation")}
                   tooltip="Query Cancellation"
+                  onClick={() => handleNavigation("/cancellation")}
                 >
-                  <Link href="/cancellation">
-                    <ShieldX className="h-4 w-4" />
-                    <span>Query Cancellation</span>
-                  </Link>
+                  <ShieldX className="h-4 w-4" />
+                  <span>Query Cancellation</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/suspense")}
                   tooltip="Suspense Mode"
+                  onClick={() => handleNavigation("/suspense")}
                 >
-                  <Link href="/suspense">
-                    <Layers className="h-4 w-4" />
-                    <span>Suspense Mode</span>
-                  </Link>
+                  <Layers className="h-4 w-4" />
+                  <span>Suspense Mode</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/websocket")}
                   tooltip="WebSocket/Realtime"
+                  onClick={() => handleNavigation("/websocket")}
                 >
-                  <Link href="/websocket">
-                    <Unplug className="h-4 w-4" />
-                    <span>WebSocket/Realtime</span>
-                  </Link>
+                  <Unplug className="h-4 w-4" />
+                  <span>WebSocket/Realtime</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  asChild
                   isActive={isActive("/testing")}
                   tooltip="Testing"
+                  onClick={() => handleNavigation("/testing")}
                 >
-                  <Link href="/testing">
-                    <TestTube className="h-4 w-4" />
-                    <span>Testing</span>
-                  </Link>
+                  <TestTube className="h-4 w-4" />
+                  <span>Testing</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
