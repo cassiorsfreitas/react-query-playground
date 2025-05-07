@@ -11,6 +11,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { CodeThemeProvider } from "@/components/theme-code-provider";
+import { MobileSidebarTrigger } from "@/components/mobile-sidebar-trigger";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,25 +42,29 @@ export default function RootLayout({
                 <div className="flex min-h-screen w-full">
                   <AppSidebar />
                   <SidebarInset>
-                    <header className="flex h-16 items-center justify-between border-b px-6">
-                      <h1 className="text-xl font-bold">
-                        React Query{" "}
-                        <span className="inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">
-                          v5
-                        </span>{" "}
-                        Playground
-                      </h1>
+                    <header className="flex h-16 items-center justify-between border-b px-4 md:px-6">
+                      <div className="flex items-center gap-2">
+                        <MobileSidebarTrigger className="md:hidden" />
+                        <h1 className="text-md md:text-xl font-bold">
+                          React Query{" "}
+                          <span className="inline-block leading-snug text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">
+                            v5
+                          </span>{" "}
+                          Playground
+                        </h1>
+                      </div>
                       <div className="flex items-center gap-3">
                         <ThemeToggle />
                         <Link
                           className="text-sm flex items-center gap-2"
                           href="/"
                         >
-                          <ExternalLink size={14} /> Docs
+                          <ExternalLink size={14} />{" "}
+                          <span className="hidden sm:inline">Docs</span>
                         </Link>
                       </div>
                     </header>
-                    <main className="p-6">{children}</main>
+                    <main className="p-4 md:p-6">{children}</main>
                   </SidebarInset>
                 </div>
               </SidebarProvider>

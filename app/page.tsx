@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto flex flex-col gap-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border rounded-lg p-6 ">
+    <div className="max-w-4xl mx-auto flex flex-col gap-4 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="border rounded-lg p-4 md:p-6">
           <h2 className="text-xl font-semibold mb-2">Core Features</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Explore the fundamental capabilities of React Query
@@ -36,7 +36,7 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="border rounded-lg p-6">
+        <div className="border rounded-lg p-4 md:p-6">
           <h2 className="text-xl font-semibold mb-2">Advanced Features</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Dive deeper into React Query&apos;s advanced capabilities
@@ -74,9 +74,9 @@ export default function Home() {
         </div>
       </div>
 
-      <Alert className="rounded-2xl border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10">
-        <Lightbulb className="h-8 w-8" />
-        <AlertDescription>
+      <Alert className="rounded-lg md:rounded-2xl border border-emerald-500/20 bg-emerald-50/50 dark:border-emerald-500/30 dark:bg-emerald-500/10 p-3 md:p-4">
+        <Lightbulb className="h-6 w-6 md:h-8 md:w-8" />
+        <AlertDescription className="text-sm md:text-base">
           It is highly recommended to explore the examples with the TanStack
           DevTools enabled. This will give you deeper insights into what&apos;s
           happening under the hood, such as query states, cache updates, and
@@ -85,9 +85,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <div className="p-6 border rounded-lg bg-muted/30">
-        <h2 className="text-xl font-semibold mb-4">Getting Started</h2>
-        <p className="mb-4">
+      <div className="p-4 md:p-6 border rounded-lg bg-muted/30">
+        <h2 className="text-xl font-semibold mb-3 md:mb-4">Getting Started</h2>
+        <p className="mb-4 text-sm md:text-base">
           Navigate through the examples using the sidebar. Each example
           demonstrates a specific feature of React Query with practical use
           cases.
