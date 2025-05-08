@@ -50,6 +50,7 @@ export function AppSidebar() {
           router.push(path);
         }, 100);
       }
+      router.push(path);
     },
     [isMobile, router, setOpenMobile]
   );
